@@ -51,6 +51,8 @@ public class ShopController {
     	
     	model.addAttribute("list",list);
     	
+    	LOGGER.info("List size is "+ list.size());
+    	
         return "shop";
     }
     

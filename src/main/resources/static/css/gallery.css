@@ -1,4 +1,4 @@
-﻿div.content {
+div.content {
 	/* The display of content is enabled using jQuery so that the slideshow content won't display unless javascript is enabled. */
 	display: none;
 	border-radius: 5px;
@@ -58,7 +58,7 @@ div.loader {
 	position: absolute;
 	top: 0;
 	left: 0;
-	background-image: url('../images/ajax-loader.gif');
+	background-image: url('/images/ajax-loader.gif');
 	background-repeat: no-repeat;
 	background-position: center;
 	width: 100%;

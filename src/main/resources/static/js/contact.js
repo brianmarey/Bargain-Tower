@@ -79,7 +79,7 @@ $(function() {
 				});
 			}
 			
-			$('#reset').after('<img src="images/ajax-loader.gif" class="loader" />').attr('disabled','disabled');
+			$('#reset').after('<img src="/images/ajax-loader.gif" class="loader" />').attr('disabled','disabled');
 			
 			$.post(action, $('#cform').serialize(),
 				function(data){

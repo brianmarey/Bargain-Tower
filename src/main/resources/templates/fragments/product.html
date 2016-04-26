@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<product>
+<div class="item-box">
+	<h3 class="item-title" style="height:90px"><a href="product.html" th:text="${list[dataIndex].name}">Ultimate </a></h3>
+		<div class="item-img">
+			<a href="product.html"><img style="max-height:280px" alt="${list[dataIndex].name}" th:src="${list[dataIndex].imageUrl}"/></a>
+		</div>
+		<div class="item-details">
+			<div class="right">
+				<div class="item-price" th:text="${list[dataIndex].price}">$150</div>
+			</div>
+			<div class="left">
+				<div th:text="${list[dataIndex].vendor}"></div>
+			</div>
+		</div>
+</div>
+</product>
+</html>

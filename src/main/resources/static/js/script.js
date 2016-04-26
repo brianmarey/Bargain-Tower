@@ -716,7 +716,7 @@
 	
 	/* ================= Product images zoom =============== */
 	if($("#img_01").length){
-		$("#img_01").elevateZoom({gallery:'gal1', cursor: 'pointer', galleryActiveClass: 'active', responsive:true, loadingIcon: 'images/ajax-loader.gif'});
+		$("#img_01").elevateZoom({gallery:'gal1', cursor: 'pointer', galleryActiveClass: 'active', responsive:true, loadingIcon: '/images/ajax-loader.gif'});
 		$('.thumbs ul li:first a').addClass('active');
 	}
 	

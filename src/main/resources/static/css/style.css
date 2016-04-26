@@ -1,4 +1,4 @@
-﻿/* ============================================================================
+/* ============================================================================
 	- CSS Document
 	- Theme Name: EXCEPTION Responsive Business HTML Template.
 	- Theme URI: http://demo.it-rays.com/exception
@@ -4462,7 +4462,8 @@ img.loader{
 	-o-transition: all 0.4s ease-in-out;
 	-webkit-transition: all 0.4s ease-in-out;
 	transition: all 0.4s ease-in-out;
-    position:relative
+    position:relative;
+    height:298px
 }
 .item-details {
 	overflow: hidden;
