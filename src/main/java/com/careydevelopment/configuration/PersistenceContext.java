@@ -19,11 +19,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableJpaRepositories(basePackages = {
-        "com.careydevelopment.root.jpa"
+        "com.careydevelopment.bargaintower.jpa"
 })
 @EnableTransactionManagement
 class PersistenceContext {
-	   private static final String PROPS_FILE = "/etc/tomcat8/resources/mysql.properties";
+	   private static final String PROPS_FILE = "/etc/tomcat8/resources/ecommerce.properties";
 		
 	   @Bean(name = "dataSource")
 	   public DriverManagerDataSource dataSource() {
@@ -54,7 +54,7 @@ class PersistenceContext {
 	        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 	        entityManagerFactoryBean.setDataSource(dataSource);
 	        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-	        entityManagerFactoryBean.setPackagesToScan("com.careydevelopment.root.jpa.entity");
+	        entityManagerFactoryBean.setPackagesToScan("com.careydevelopment.bargaintower.jpa.entity");
 	 
 	        Properties jpaProperties = new Properties();
 
