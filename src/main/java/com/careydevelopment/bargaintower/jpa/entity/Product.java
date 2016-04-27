@@ -70,6 +70,7 @@ public class Product extends AbstractEntity{
 	
 	@Column(name="image_url")
 	private String imageUrl = "";
+	
 
 	 @OneToMany
 	 @JoinTable(
@@ -79,6 +80,9 @@ public class Product extends AbstractEntity{
 	 )
 	 private List<AttributeValue> attributes = new ArrayList<AttributeValue>();
 	
+	@Transient
+	private boolean moreColors = false;
+	 
 	@Transient
 	private String sizes = "";
 	
@@ -208,6 +212,11 @@ public class Product extends AbstractEntity{
 	public String getPrice() {
 		return price;
 	}
+	
+	public String getPriceCurrency() {
+		return "$" + price;
+	}
+	
 	public void setPrice(String price) {
 		/*System.err.println("setting price to " + price);
 		try {
@@ -329,6 +338,19 @@ public class Product extends AbstractEntity{
 		}
 		
 		return onSale;
+	}
+	
+	public boolean isMoreColors() {
+		int numColors = 0;
+		
+		for (AttributeValue av : attributes) {
+			if (av.getAttribute().getName().equalsIgnoreCase("Color")) {
+				numColors++;
+				if (numColors > 1) break;
+			}
+		}
+		
+		return (numColors > 1);
 	}
 	
 	

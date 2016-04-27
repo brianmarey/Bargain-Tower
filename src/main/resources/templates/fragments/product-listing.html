@@ -3,15 +3,17 @@
 <div class="item-box">
 	<h3 class="item-title" style="height:90px"><a th:href="${list[dataIndex].buyUrl}" target="_blank" rel="nofollow" th:text="${list[dataIndex].name}">Ultimate </a></h3>
 		<div class="item-img">
-			<a th:href="${list[dataIndex].buyUrl}"><img style="max-height:280px" alt="${list[dataIndex].name}" target="_blank" rel="nofollow" th:src="${list[dataIndex].imageUrl}"/></a>
+			<a th:href="${list[dataIndex].buyUrl}"><span th:if="${list[dataIndex].onSale == true}"><span class="sale">Sale</span></span><img style="max-height:280px" alt="${list[dataIndex].name}" target="_blank" rel="nofollow" th:src="${list[dataIndex].imageUrl}"/></a>
 		</div>
-		<div class="item-details">
+		<div class="item-details" style="height:75px">
 			<div class="right">
-				<div class="item-price" th:text="${list[dataIndex].onSale == true} ? ${list[dataIndex].retailPrice} : ''" style="text-decoration: line-through">$150</div>
-				<div class="item-price" th:text="${list[dataIndex].price}">$150</div>
+				<div class="item-price" style="padding:5px 5px" th:text="${'$' + list[dataIndex].price}">1500.33</div>
 			</div>
 			<div class="left">
-				<div th:text="${list[dataIndex].vendor}"></div>
+				<div class="item-cart" th:if="${list[dataIndex].moreColors == true}">
+					<a class="add-cart" th:href="${list[dataIndex].buyUrl}"><i class="fa fa-thumbs-o-up"></i>More Colors</a>
+				</div>
+				<div th:text="${list[dataIndex].vendor}" style="margin-top:10px"></div>
 			</div>
 		</div>
 </div>

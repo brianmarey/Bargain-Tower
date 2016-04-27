@@ -41,8 +41,8 @@ public class ShopController {
     	LOGGER.info("subcat is " + CategoryHelper.getReadableName(subcategory));
     	
     	model.addAttribute("root", CategoryHelper.getReadableName(root));
-    	model.addAttribute("category",CategoryHelper.getReadableName(root));
-    	model.addAttribute("subcategory",CategoryHelper.getReadableName(root));
+    	model.addAttribute("category",CategoryHelper.getReadableName(category));
+    	model.addAttribute("subcategory",CategoryHelper.getReadableName(subcategory));
     	
     	int page = getPage(pageNum);
     	
