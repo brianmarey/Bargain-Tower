@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.careydevelopment.bargaintower.jpa.entity.Product;
 import com.careydevelopment.bargaintower.jpa.repository.ProductRepository;
+import com.careydevelopment.bargaintower.util.CategoryHelper;
 
 @Controller
 @RequestMapping("/shop")
@@ -35,9 +36,13 @@ public class ShopController {
     	
     	model.addAttribute("shopActive", "active");
     	
-    	LOGGER.info("root is" + root);
-    	LOGGER.info("category is " + category);
-    	LOGGER.info("subcat is " + subcategory);
+    	LOGGER.info("root is" + CategoryHelper.getReadableName(root));
+    	LOGGER.info("category is " + CategoryHelper.getReadableName(category));
+    	LOGGER.info("subcat is " + CategoryHelper.getReadableName(subcategory));
+    	
+    	model.addAttribute("root", CategoryHelper.getReadableName(root));
+    	model.addAttribute("category",CategoryHelper.getReadableName(root));
+    	model.addAttribute("subcategory",CategoryHelper.getReadableName(root));
     	
     	int page = getPage(pageNum);
     	
@@ -51,9 +56,7 @@ public class ShopController {
     	
     	model.addAttribute("list",list);
     	
-    	LOGGER.info("List size is "+ list.size());
-    	
-        return "shop";
+    	return "shop";
     }
     
     

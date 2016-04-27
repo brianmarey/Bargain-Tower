@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.careydevelopment.bargaintower.util.SiteConstants;
+
 @Entity
 @Table(name = "product")
 public class Product extends AbstractEntity{
@@ -116,6 +118,9 @@ public class Product extends AbstractEntity{
 	@Transient
 	private Map<String,String> attMap = new HashMap<String,String>();
 	
+	@Transient
+	private boolean onSale = false;
+	
 	
 	public String getSizes() {
 		return sizes;
@@ -148,6 +153,10 @@ public class Product extends AbstractEntity{
 		this.inStock = inStock;
 	}
 	public String getName() {
+		if (name != null && name.length() > SiteConstants.MAX_PRODUCT_NAME_LENGTH) {
+			name = name.substring(0, SiteConstants.MAX_PRODUCT_NAME_LENGTH - 3) + "...";
+		}
+		
 		return name;
 	}
 	public void setName(String name) {
@@ -304,6 +313,22 @@ public class Product extends AbstractEntity{
 	}
 	public void setAttributes(List<AttributeValue> attributes) {
 		this.attributes = attributes;
+	}
+	public boolean isOnSale() {
+		if (price == null || retailPrice == null) return false;
+		
+		try {
+			Float priceF = new Float(price);
+			Float retailPriceF = new Float(retailPrice);
+			
+			if (retailPriceF > priceF) {
+				return true;
+			}	
+		} catch (NumberFormatException ne) {
+			ne.printStackTrace();
+		}
+		
+		return onSale;
 	}
 	
 	
