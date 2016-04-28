@@ -1,0 +1,14 @@
+<pagination>
+		<ul>
+			<th:block th:fragment="content" th:if="${hasPrevious == true}">
+			<li th:class="${pageNum == 0} ? selected : none"><a class="skew25" th:href="@{''(pageNum=0)}"><i class="fa fa-angle-left"></i><i class="fa fa-angle-left"></i></a></li>
+			<li><a class="skew25" th:href="@{''(pageNum=${previousPage})}"><i class="fa fa-angle-left"></i></a></li></th:block>
+			<li th:class="${pageNum == firstPage} ? selected : none"><a class="skew25" th:href="@{''(pageNum=${firstPage})}" th:text="${firstPage + 1}">x</a></li>
+			<li th:class="${pageNum == firstPage + 1} ? selected : none"><a class="skew25" th:href="@{''(pageNum=${firstPage + 1})}" th:text="${firstPage + 2}">2</a></li>
+			<li th:class="${pageNum == firstPage + 2} ? selected : none"><a class="skew25" th:href="@{''(pageNum=${firstPage + 2})}" th:text="${firstPage + 3}">2</a></li>
+			<li th:class="${pageNum == firstPage + 3} ? selected : none"><a class="skew25" th:href="@{''(pageNum=${firstPage + 3})}" th:text="${firstPage + 4}">2</a></li>
+			<li th:class="${pageNum == firstPage + 4} ? selected : none"><a class="skew25" th:href="@{''(pageNum=${firstPage + 4})}" th:text="${firstPage + 5}">2</a></li>
+			<th:block th:fragment="content" th:if="${hasNext == true}"><li><a class="skew25" th:href="@{''(pageNum=${nextPage})}"><i class="fa fa-angle-right"></i></a></li>
+			<li th:class="${pageNum == totalPages - 1} ? selected : none"><a class="skew25" th:href="@{''(pageNum=${totalPages - 1})}"><i class="fa fa-angle-right"></i><i class="fa fa-angle-right"></i></a></li></th:block>
+		</ul>
+</pagination>
