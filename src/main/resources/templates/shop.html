@@ -45,7 +45,7 @@
 							<div class="cell-12">
 								<h1 class="fx" data-animate="fadeInLeft">Bargain <span style="color:#F2F2F2">Tower</span></h1>
 								<div class="breadcrumbs main-bg fx" data-animate="fadeInUp">
-									<span th:text="${root != null} ? 'You Are In:' : ''" class="bold">You Are In:</span><a th:href="@{/{root}(root=${rootValue})}" th:text="${root != null} ? ${root} : ''">Home</a><span class="line-separate" th:text="${category != null} ? '/' : ''">/</span><a th:href="@{/{root}/{category}(root=${rootValue},category=${categoryValue})}" th:text="${category != null} ? ${category} : ''">Pages </a><span class="line-separate" th:text="${subcategory != null} ? '/' : ''">/</span><a th:href="@{/{root}/{category}/{subcategory}(root=${rootValue},category=${categoryValue},subcategory=${subcategoryValue})}" th:text="${subcategory != null} ? ${subcategory} : ''">Shop </a>
+									<span th:text="${root != null} ? 'You Are In:' : ''" class="bold">You Are In:</span><a th:href="@{/shop/{root}(root=${rootValue})}" th:text="${root != null} ? ${root} : ''">Home</a><span class="line-separate" th:text="${category != null} ? '/' : ''">/</span><a th:href="@{/shop/{root}/{category}(root=${rootValue},category=${categoryValue})}" th:text="${category != null} ? ${category} : ''">Pages </a><span class="line-separate" th:text="${subcategory != null} ? '/' : ''">/</span><a th:href="@{/shop/{root}/{category}/{subcategory}(root=${rootValue},category=${categoryValue},subcategory=${subcategoryValue})}" th:text="${subcategory != null} ? ${subcategory} : ''">Shop </a>
 								</div>
 							</div>
 						</div>
