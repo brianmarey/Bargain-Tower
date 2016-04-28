@@ -43,64 +43,9 @@
 					<div class="container">
 						<div class="row">
 							<div class="cell-12">
-								<h1 class="fx" data-animate="fadeInLeft">Bargain <span>Tower</span></h1>
+								<h1 class="fx" data-animate="fadeInLeft">Bargain <span style="color:#F2F2F2">Tower</span></h1>
 								<div class="breadcrumbs main-bg fx" data-animate="fadeInUp">
-									<span th:text="${root != null} ? 'You Are In:' : ''" class="bold">You Are In:</span><a href="#" th:text="${root != null} ? ${root} : ''">Home</a><span class="line-separate" th:text="${category != null} ? '/' : ''">/</span><a href="#" th:text="${category != null} ? ${category} : ''">Pages </a><span class="line-separate" th:text="${subcategory != null} ? '/' : ''">/</span><a href="#" th:text="${subcategory != null} ? ${subcategory} : ''">Shop </a>
-								</div>
-								<div class="cart-icon fx" data-animate="fadeInRight">
-									<div class="cart-heading">
-										
-									</div>
-									<div class="cart-popup">
-										<div class="empty">Your shopping cart is empty!</div>
-										<div class="mini-cart">
-											<ul class="mini-cart-list">
-												<li>
-													<a class="cart-mini-lft" href="product.html"><img th:src="@{/images/shop/pro-1.jpg}" alt=""/></a>
-													<div class="cart-body">
-														<a href="product.html">Ultimate Fashion Wear White</a>
-														<div class="price">$150</div>
-													</div>
-													<a class="remove" href="#"><i class="fa fa-times" title="Remove"></i></a>
-												</li>
-												<li>
-													<a class="cart-mini-lft" href="product.html"></a>
-													<div class="cart-body">
-														<a href="product.html">Fashion Wear White</a>
-														<div class="price">$50</div>
-													</div>
-													<a class="remove" href="#"><i class="fa fa-times" title="Remove"></i></a>
-												</li>
-												<li>
-													<a class="cart-mini-lft" href="product.html"></a>
-													<div class="cart-body">
-														<a href="product.html">Ultimate Fashion</a>
-														<div class="price">$220</div>
-													</div>
-													<a class="remove" href="#"><i class="fa fa-times" title="Remove"></i></a>
-												</li>
-											</ul>
-											<div class="mini-cart-total">
-												<div class="clearfix">
-													<div class="left">Sub-Total:</div>
-													<div class="right">$230.00</div>
-												</div>
-												<div class="clearfix">
-													<div class="left">Tax (-10.00):</div>
-													<div class="right">$12.05</div>
-												</div>
-												<div class="clearfix">
-												</div>
-												<div class="clearfix">
-													<div class="left">Total:</div>
-													<div class="right">$200.20</div>
-												</div>
-											</div>
-											<div class="checkout">
-												<a class="btn" href="cart.html">View Cart</a><a class="btn" href="check-out.html">Checkout</a>
-											</div>
-										</div>
-									</div>
+									<span th:text="${root != null} ? 'You Are In:' : ''" class="bold">You Are In:</span><a th:href="@{/{root}(root=${rootValue})}" th:text="${root != null} ? ${root} : ''">Home</a><span class="line-separate" th:text="${category != null} ? '/' : ''">/</span><a th:href="@{/{root}/{category}(root=${rootValue},category=${categoryValue})}" th:text="${category != null} ? ${category} : ''">Pages </a><span class="line-separate" th:text="${subcategory != null} ? '/' : ''">/</span><a th:href="@{/{root}/{category}/{subcategory}(root=${rootValue},category=${categoryValue},subcategory=${subcategoryValue})}" th:text="${subcategory != null} ? ${subcategory} : ''">Shop </a>
 								</div>
 							</div>
 						</div>
@@ -110,7 +55,7 @@
 				<div class="sectionWrapper">
 					<div class="container">
 						<div class="row">
-							<div class="box success-box center hidden">Your item was added succesfully.</div>
+							<div class="box success-box center hidden"></div>
 							<div class="clearfix"></div>
 							
 							<div th:include="fragments/aside :: sidebar"></div>
@@ -142,27 +87,12 @@
 									</div>										
 								</div>
 								<div class="clearfix"></div>
-								<div class="pager skew-25">
-						    		<ul>
-						    			<th:block th:fragment="content" th:if="${hasPrevious == true}"><li><a class="skew25" th:href="@{''(pageNum=${previousPage})}"><i class="fa fa-angle-left"></i></a></li></th:block>
-						    			<th:block th:fragment="content" th:if="${showEllipsis == true and rightEllipsis == false}">
-						    			<li th:class="${pageNum == 0} ? selected : none"><a class="skew25" th:href="@{''(pageNum=${0)}">1</a></li>
-						    			<li><span class="skew25">...</span></li></th:block>
-						    			<li th:class="${pageNum == firstPage} ? selected : none"><span class="skew25" th:text="${firstPage + 1}">x</span></li>
-						    			<li th:class="${pageNum == firstPage + 1} ? selected : none"><a class="skew25" th:href="@{''(pageNum=${firstPage + 1})}" th:text="${firstPage + 2}">2</a></li>
-						    			<li th:class="${pageNum == firstPage + 2} ? selected : none"><a class="skew25" th:href="@{''(pageNum=${firstPage + 2})}" th:text="${firstPage + 3}">2</a></li>
-						    			<li th:class="${pageNum == firstPage + 3} ? selected : none"><a class="skew25" th:href="@{''(pageNum=${firstPage + 3})}" th:text="${firstPage + 4}">2</a></li>
-						    			<li th:class="${pageNum == firstPage + 4} ? selected : none"><a class="skew25" th:href="@{''(pageNum=${firstPage + 4})}" th:text="${firstPage + 5}">2</a></li>
-						    			<th:block th:fragment="content" th:if="${showEllipsis == true and rightEllipsis == true}"><li><span class="skew25">...</span></li>
-						    			<li th:class="${pageNum == totalPages - 1} ? selected : none"><a class="skew25" th:href="@{''(pageNum=${totalPages - 1})}" th:text="${totalPages}">10</a></li></th:block>
-						    			<th:block th:fragment="content" th:if="${hasNext == true}"><li><a class="skew25" th:href="@{''(pageNum=${nextPage})}"><i class="fa fa-angle-right"></i></a></li></th:block>
-						    		</ul>
+								<div class="pager skew-25" th:include="fragments/pagination :: pagination">
 					    		</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				
 			</div>
 			<!-- Content End -->
 			
