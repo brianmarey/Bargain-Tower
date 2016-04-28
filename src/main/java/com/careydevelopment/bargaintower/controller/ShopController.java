@@ -49,6 +49,8 @@ public class ShopController {
     	Pageable pageable = new PageRequest(page,RESULTS_PER_PAGE);
     	Page<Product> products = productRepository.findProducts(pageable);
     	
+    	setPageInfo(products, model, page);
+    	
     	List<Product> list = new ArrayList<Product>();
     	for (Product p : products) {
     		list.add(p);
@@ -60,6 +62,46 @@ public class ShopController {
     }
     
     
+    private void setPageInfo(Page<Product> products, Model model, int pageNum) {
+    	int totalPages = products.getTotalPages();
+    	boolean hasNext = products.hasNext();
+    	boolean hasPrevious = products.hasPrevious();
+    	boolean isFirst = products.isFirst();
+    	boolean isLast = products.isLast();
+    	boolean showEllipsis = false;
+    	int firstPage = pageNum;
+    	boolean ellipsisRight = true;
+    	
+    	if (totalPages - pageNum > 6) {
+    		showEllipsis = true;
+    	}
+    	
+    	if (totalPages - pageNum < 6) {
+    		showEllipsis = true;
+    		firstPage = totalPages - 5;
+    		ellipsisRight = false;
+    	}
+    	
+    	if (hasNext) {
+    		int nextPage = pageNum + 1;
+    		model.addAttribute("nextPage",nextPage);
+    	}
+    	
+    	if (hasPrevious) {
+    		int previousPage = pageNum - 1;
+    		model.addAttribute("previousPage",previousPage);
+    	}
+    	
+    	model.addAttribute("totalPages",totalPages);
+    	model.addAttribute("hasNext",hasNext);
+    	model.addAttribute("hasPrevious",hasPrevious);
+    	model.addAttribute("isFirst",isFirst);
+    	model.addAttribute("isLast",isLast);
+    	model.addAttribute("pageNum",pageNum);
+    	model.addAttribute("showEllipsis",showEllipsis);
+    	model.addAttribute("firstPage",firstPage);
+    	model.addAttribute("ellipsisRight",ellipsisRight);
+    }
     
     
     private int getPage(String pageNum) {
@@ -75,5 +117,4 @@ public class ShopController {
     	
     	return page;
     }
-        
 }
