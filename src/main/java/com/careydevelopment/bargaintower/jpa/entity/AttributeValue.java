@@ -20,14 +20,6 @@ public class AttributeValue extends AbstractEntity{
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Attribute attribute;
 	
-	@ManyToOne
-	@JoinTable(
-	   name = "product_attribute", 
-	   joinColumns = @JoinColumn(name = "attribute_value_id"), 
-	   inverseJoinColumns = @JoinColumn(name = "product_id")
-	 )
-	private Product product;
-	
 	public AttributeValue (String name) {
 		this.name = name;
 	}
@@ -59,16 +51,4 @@ public class AttributeValue extends AbstractEntity{
 	public void setAttribute(Attribute attribute) {
 		this.attribute = attribute;
 	}
-
-
-	public Product getProduct() {
-		return product;
-	}
-
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-	
-	
 }

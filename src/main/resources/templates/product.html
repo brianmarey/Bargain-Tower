@@ -44,9 +44,8 @@
 					<div class="container">
 						<div class="row">
 							<div class="cell-12">
-								<h1 class="fx" data-animate="fadeInLeft">Polo T-Shirt For Men And Women</h1>
+								<h1 class="fx" data-animate="fadeInLeft" th:text="${product.name}"></h1>
 								<div class="breadcrumbs main-bg fx" data-animate="fadeInUp">
-									<span class="bold">You Are In:</span><a href="#">Home</a><span class="line-separate">/</span><a href="#">Pages </a><span class="line-separate">/</span><a href="#">Shop </a><span class="line-separate">/</span><span>Polo T-Shirt For Men</span>
 								</div>
 							</div>
 						</div>
@@ -62,31 +61,31 @@
 							<div class="cell-9">
 								<div class="cell-4">
 									<div class="product-img">
-										<img alt="" id="img_01" src="images/shop/pro-1.jpg" />
+										<img alt="" id="img_01" th:src="${product.imageUrl}" />
 										<div class="thumbs">
 											<ul id="gal1">
-												<li><a data-image="images/shop/pro-1.jpg" href="#"><img alt="" src="images/shop/pro-1.jpg" /></a></li>
-												<li><a data-image="images/shop/pro-2.jpg" href="#"><img alt="" src="images/shop/pro-2.jpg" /></a></li>
-												<li><a data-image="images/shop/pro-3.jpg" href="#"><img alt="" src="images/shop/pro-3.jpg" /></a></li>
-												<li><a data-image="images/shop/pro-4.jpg" href="#"><img alt="" src="images/shop/pro-4.jpg" /></a></li>
 											</ul>
 										</div>
 									</div>
 								</div>
 								<div class="cell-8">
 									<div class="product-specs price-block list-item">
-										<div class="price-box"><span class="product-price">$150</span><span class="old-price">$250</span></div>
+										<div class="price-box"><span class="product-price" th:text="${product.price}">$150</span><span th:if="${product.onSale}"><span class="old-price" th:text="${product.retailPrice}">$250</span></span></div>
 									</div>
 									<div class="product-specs product-block list-item">
 										<label class="control-label"><i class="fa fa-paper-plane-o"></i>Size:</label>
-										<a href="#" class="btn btn-small btn-border">M</a><a href="#" class="btn btn-small btn-border selected">L</a><a href="#" class="btn btn-small btn-border">XL</a><a href="#" class="btn btn-small btn-border">2XL</a>
+										<th:block th:fragment="content" th:each="size,status : ${product.sizes}">
+											<a class="btn btn-small btn-border selected" th:text="${size}">M</a>
+										</th:block>
 									</div>
 									<div class="product-specs product-block list-item">
 										<label class="control-label"><i class="fa fa-camera"></i>Color:</label>
-										<a href="#" class="btn btn-small btn-border">Black</a><a href="#" class="btn btn-small btn-border">White</a><a href="#" class="btn btn-small btn-border selected">Red</a><a href="#" class="btn btn-small btn-border">Yellow</a>
+										<th:block th:fragment="content" th:each="color,status : ${product.colors}">
+											<a class="btn btn-small btn-border selected" th:text="${color}">M</a>
+										</th:block>
 									</div>
 									<div class="list-item product-block item-add">
-										<div class="left"><input type="submit" value="Learn More" class="btn btn-medium add-cart main-bg"/></div>
+										<div class="left"><a th:href="${product.buyUrl}" target="_blank"><input type="button" value="Learn More" class="btn btn-medium add-cart main-bg" /></a></div>
 									</div>
 								</div>
 								<div class="clearfix"></div>
@@ -101,14 +100,7 @@
 											</ul>
 											<div class="tabs-pane">
 												<div class="tab-panel active">
-													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque imperdiet purus quis metus imperdiet fermentum. Suspendisse hendrerit id lacus id lobortis. Vestibulum quam elit, dapibus ac augue ut, porttitor viverra dui. Pellentesque imperdiet purus quis metus imperdiet fermentum. Suspendisse hendrerit id lacus id lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque imperdiet purus quis metus imperdiet fermentum. Suspendisse hendrerit id lacus id lobortis. Vestibulum quam elit, dapibus ac augue ut, porttitor viverra dui. Pellentesque imperdiet purus quis metus imperdiet fermentum. Suspendisse hendrerit id lacus id lobortis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque imperdiet purus quis metus imperdiet fermentum. Suspendisse hendrerit id lacus id lobortis. Vestibulum quam elit, dapibus ac augue ut, porttitor viverra dui. Pellentesque imperdiet purus quis metus imperdiet fermentum. Suspendisse hendrerit id lacus id lobortis.</p>
-													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque imperdiet purus quis metus imperdiet fermentum. Suspendisse hendrerit id lacus id lobortis. Vestibulum quam elit, dapibus ac augue ut, porttitor viverra dui. Pellentesque imperdiet purus quis metus imperdiet fermentum. Suspendisse hendrerit id lacus id lobortis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque imperdiet purus quis metus imperdiet fermentum. Suspendisse hendrerit id lacus id lobortis. Vestibulum quam elit, dapibus ac augue ut, porttitor viverra dui. Pellentesque imperdiet purus quis metus imperdiet fermentum. Suspendisse hendrerit id lacus id lobortis.</p>
-													<ul class="list alt list-ok">
-														<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit pellentesque</li>
-														<li>Suspendisse hendrerit id lacus id lobortis vestibulum quam elit</li>
-														<li>Fusce scelerisque pellentesqu suspendisse elementum adipiscing</li>
-														<li>Feugiat sodales pretium massa euismod tempus suspendisse hendrerit</li>
-													</ul>
+													<p th:text="${product.description}"></p>
 												</div>
 											</div>
 										</div>
@@ -127,7 +119,7 @@
 			    				<div class="item-box">
 			    					<h3 class="item-title"><a href="product.html">Media Tech</a></h3>
 			    					<div class="item-img">
-			    						<a href="product.html"><img alt="" src="images/shop/pro-1.jpg"/></a>
+			    						<a href="product.html"><img alt="" th:src="${product.imageUrl}"/></a>
 			    					</div>
 			    					<div class="item-details">
 		                            	<p>Phasellus blandit elementum tellus, nec adipiscing dui elementum non Phasellus blandit elementum tellus, nec adipiscing dui elementum non Phasellus blandit elementum tellus, nec adipiscing dui elementum non</p>

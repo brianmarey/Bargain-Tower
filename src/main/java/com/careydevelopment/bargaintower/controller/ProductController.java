@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.careydevelopment.bargaintower.jpa.entity.AttributeValue;
+import com.careydevelopment.bargaintower.jpa.entity.Product;
 import com.careydevelopment.bargaintower.jpa.repository.ProductRepository;
 
 @Controller
@@ -23,8 +25,15 @@ public class ProductController {
     	
     	//model.addAttribute("shopActive", "active");
     	
-    	
-    	//model.addAttribute("list",list);
+		Product product = productRepository.findOne(272l);
+		
+		LOGGER.info("Product is " + product.getName());
+		
+		/*for (String s : product.getSizes()) {
+			LOGGER.info("Size is " + s);
+		}*/
+		
+    	model.addAttribute("product",product);
     	
     	return "product";
     }    
