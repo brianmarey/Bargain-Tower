@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<title>Bargain Tower</title>
-		<meta name="description" content="Bargain Tower"/>
+		<title th:text="${title}">Bargain Tower</title>
+		<meta name="description" th:content="${description}"/>
 		<meta name="author" content="Carey Development, LLC"/>
 		
 		
@@ -44,7 +44,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="cell-12">
-								<h1 class="fx" data-animate="fadeInLeft" th:text="${product.name}"></h1>
+								<h1 class="fx" data-animate="fadeInLeft" style="color:#f2f2f2" th:text="${product.name}"></h1>
 								<div class="breadcrumbs main-bg fx" data-animate="fadeInUp">
 								</div>
 							</div>

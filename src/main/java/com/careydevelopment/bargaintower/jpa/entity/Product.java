@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.careydevelopment.bargaintower.util.SiteConstants;
+import com.careydevelopment.bargaintower.util.SlugMaker;
 
 @Entity
 @Table(name = "product")
@@ -365,5 +366,18 @@ public class Product extends AbstractEntity{
 		return (numColors > 1);
 	}
 	
+	
+	public String getProductUrl() {
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("/product/");
+		builder.append(id);
+		builder.append("-");
+
+		String slug = SlugMaker.makeSlug(name);
+		builder.append(slug);
+		
+		return builder.toString();
+	}
 	
 }

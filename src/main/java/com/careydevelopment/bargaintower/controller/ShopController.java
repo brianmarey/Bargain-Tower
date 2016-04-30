@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.careydevelopment.bargaintower.jpa.entity.Product;
 import com.careydevelopment.bargaintower.jpa.repository.ProductRepository;
 import com.careydevelopment.bargaintower.util.CategoryHelper;
+import com.careydevelopment.bargaintower.util.DescriptionHelper;
 import com.careydevelopment.bargaintower.util.PaginationHelper;
+import com.careydevelopment.bargaintower.util.TitleHelper;
 
 @Controller
 @RequestMapping("/shop")
@@ -37,18 +39,14 @@ public class ShopController {
     	
     	model.addAttribute("shopActive", "active");
     	
-    	LOGGER.info("root is" + CategoryHelper.getReadableName(root));
-    	LOGGER.info("category is " + CategoryHelper.getReadableName(category));
-    	LOGGER.info("subcat is " + CategoryHelper.getReadableName(subcategory));
-
-    	model.addAttribute("root", CategoryHelper.getReadableName(root));
-    	model.addAttribute("category",CategoryHelper.getReadableName(category));
-    	model.addAttribute("subcategory",CategoryHelper.getReadableName(subcategory));
-
-    	model.addAttribute("rootValue", root);
-    	model.addAttribute("categoryValue",category);
-    	model.addAttribute("subcategoryValue",subcategory);
-
+    	setDisplayAttributes(model,root,category,subcategory);
+    	fetchAndDisplayProducts(pageNum,model);
+    	    	
+    	return "shop";
+    }    
+    
+    
+    private void fetchAndDisplayProducts(String pageNum, Model model) {
     	int page = getPage(pageNum);
     	
     	Pageable pageable = new PageRequest(page,RESULTS_PER_PAGE);
@@ -61,10 +59,8 @@ public class ShopController {
     		list.add(p);
     	}
     	
-    	model.addAttribute("list",list);
-    	
-    	return "shop";
-    }    
+    	model.addAttribute("list",list);	
+    }
     
     
     private int getPage(String pageNum) {
@@ -79,5 +75,27 @@ public class ShopController {
     	}
     	
     	return page;
+    }
+    
+    
+    private void setDisplayAttributes(Model model, String root, String category, String subcategory) {
+    	String readableRoot = CategoryHelper.getReadableName(root);
+    	String readableCategory = CategoryHelper.getReadableName(category);
+    	String readableSubcategory = CategoryHelper.getReadableName(subcategory);
+    	
+    	LOGGER.info("root is" + readableRoot);
+    	LOGGER.info("category is " + readableCategory);
+    	LOGGER.info("subcat is " + readableSubcategory);
+
+    	model.addAttribute("root", readableRoot);
+    	model.addAttribute("category",readableCategory);
+    	model.addAttribute("subcategory",readableSubcategory);
+
+    	model.addAttribute("rootValue", root);
+    	model.addAttribute("categoryValue",category);
+    	model.addAttribute("subcategoryValue",subcategory);
+    	
+    	model.addAttribute("title", TitleHelper.getTitle(readableRoot, readableCategory, readableSubcategory));
+    	model.addAttribute("description", DescriptionHelper.getDescription(readableCategory, readableSubcategory));
     }
 }
