@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.careydevelopment.bargaintower.exception.ProductNotFoundException;
 import com.careydevelopment.bargaintower.jpa.entity.Product;
 import com.careydevelopment.bargaintower.jpa.repository.ProductRepository;
 import com.careydevelopment.bargaintower.util.DescriptionHelper;
@@ -24,7 +25,7 @@ public class ProductController {
 	ProductRepository productRepository;
 	
 	@RequestMapping("/{productId}")
-    public String shop(@PathVariable("productId") String productId, Model model) {    	    
+    public String shop(@PathVariable("productId") String productId, Model model) throws ProductNotFoundException {    	    
     	
     	//model.addAttribute("shopActive", "active");
     	
@@ -44,14 +45,14 @@ public class ProductController {
     }    
 	
 	
-	private Product fetchProduct(String productId) {
+	private Product fetchProduct(String productId) throws ProductNotFoundException {
 		Long id = SlugParser.getIdFromSlug(productId);
 		
 		if (id != null) {
 			Product product = productRepository.findOne(id);
 			return product;
 		} else {
-			throw new RuntimeException ("Can't find product!");
+			throw new ProductNotFoundException("Can't find product " + productId);
 		}
 	}
 }
