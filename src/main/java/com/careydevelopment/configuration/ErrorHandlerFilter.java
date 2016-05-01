@@ -8,6 +8,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
@@ -31,16 +32,24 @@ public class ErrorHandlerFilter implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, 
-               ServletResponse response, FilterChain chain)
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 		throws IOException, ServletException {
-
-		LOGGER.info("\n\n\nin fitler\n");
+		
 		try {
-			//LOGGER.info(response.g);
+			String uri = ((HttpServletRequest)request).getRequestURI();
+			if (uri == null) uri = "";
+			//LOGGER.info(uri);
+			
 			HttpServletResponseWrapper wrapper = new HttpServletResponseWrapper((HttpServletResponse)response); 
-			LOGGER.info("" + wrapper.getStatus());
-			chain.doFilter(request, response);
+			int statusCode = wrapper.getStatus();
+			//LOGGER.info("" + statusCode);
+			
+			if (statusCode == 404 && !uri.endsWith("/404")) {
+				LOGGER.info("Going to 404");
+				request.getRequestDispatcher("/404").forward(request, wrapper);
+			} else {
+				chain.doFilter(request, response);	
+			}
 		} catch (Exception ex) {
 			LOGGER.error("Caught exception!");
 			request.setAttribute("errorMessage", ex);

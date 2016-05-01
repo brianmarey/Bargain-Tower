@@ -75,13 +75,13 @@
 									<div class="product-specs product-block list-item">
 										<label class="control-label"><i class="fa fa-paper-plane-o"></i>Size:</label>
 										<th:block th:fragment="content" th:each="size,status : ${product.sizes}">
-											<a class="btn btn-small btn-border selected" th:text="${size}">M</a>
+											<a class="btn btn-small btn-border selected" style="margin-bottom:3px" th:text="${size}">M</a>
 										</th:block>
 									</div>
 									<div class="product-specs product-block list-item">
 										<label class="control-label"><i class="fa fa-camera"></i>Color:</label>
 										<th:block th:fragment="content" th:each="color,status : ${product.colors}">
-											<a class="btn btn-small btn-border selected" th:text="${color}">M</a>
+											<a class="btn btn-small btn-border selected" style="margin-bottom:3px" th:text="${color}">M</a>
 										</th:block>
 									</div>
 									<div class="list-item product-block item-add">
@@ -115,84 +115,12 @@
 					<div class="container">
 						<h3 class="block-head">Similar Products</h3>
 						<div class="row">
-							<div class="cell-4">
-			    				<div class="item-box">
-			    					<h3 class="item-title"><a href="product.html">Media Tech</a></h3>
-			    					<div class="item-img">
-			    						<a href="product.html"><img alt="" th:src="${product.imageUrl}"/></a>
-			    					</div>
-			    					<div class="item-details">
-		                            	<p>Phasellus blandit elementum tellus, nec adipiscing dui elementum non Phasellus blandit elementum tellus, nec adipiscing dui elementum non Phasellus blandit elementum tellus, nec adipiscing dui elementum non</p>
-		                            	<div class="right">
-		                            		<div class="item-rating">
-												<span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span>
-											</div>
-											<div class="item-price">$50</div>
-		                            	</div>
-										<div class="left">
-											<div class="item-cart">
-												<a class="add-cart" href="#"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-											</div>
-                                            <div class="item-tools">
-	                                            <a href="#"><i class="fa fa-heart" data-title="Add to Favourites" data-tooltip="true"></i></a>
-	                                            <a href="#"><i class="fa fa-exchange" data-title="Compare" data-tooltip="true"></i></a>
-                                            </div>
-                                        </div>
-			    					</div>
-			    				</div>
-			    			</div>
-			    			<div class="cell-4">
-			    				<div class="item-box">
-			    					<h3 class="item-title"><a href="product.html">Ultimate Fashion Wear White</a></h3>
-			    					<div class="item-img">
-			    						<a href="product.html"><img alt="" th:src="${product.imageUrl}"/></a>
-			    					</div>
-			    					<div class="item-details">
-		                            	<p>Phasellus blandit elementum tellus, nec adipiscing dui elementum non Phasellus blandit elementum tellus, nec adipiscing dui elementum non Phasellus blandit elementum tellus, nec adipiscing dui elementum non</p>
-		                            	<div class="right">
-		                            		<div class="item-rating">
-												<span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span>
-											</div>
-											<div class="item-price">$150</div>
-		                            	</div>
-										<div class="left">
-											<div class="item-cart">
-												<a class="add-cart" href="#"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-											</div>
-                                            <div class="item-tools">
-	                                            <a href="#"><i class="fa fa-heart" data-title="Add to Favourites" data-tooltip="true"></i></a>
-	                                            <a href="#"><i class="fa fa-exchange" data-title="Compare" data-tooltip="true"></i></a>
-                                            </div>
-                                        </div>
-			    					</div>
-			    				</div>
-			    			</div>
-			    			<div class="cell-4">
-			    				<div class="item-box">
-			    					<h3 class="item-title"><a href="product.html">Club Aldo Black Leather</a></h3>
-			    					<div class="item-img">
-			    						<a href="product.html"><img alt="" th:src="${product.imageUrl}"/></a>
-			    					</div>
-			    					<div class="item-details">
-				    					<p>Phasellus blandit elementum tellus, nec adipiscing dui elementum non Phasellus blandit elementum tellus, nec adipiscing dui elementum non Phasellus blandit elementum tellus, nec adipiscing dui elementum non</p>
-		                            	<div class="right">
-		                            		<div class="item-rating">
-												<span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span>
-											</div>
-											<div class="item-price">$80</div>
-		                            	</div>
-										<div class="left">
-											<div class="item-cart">
-												<a class="add-cart" href="#"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-											</div>
-                                            <div class="item-tools">
-	                                            <a href="#"><i class="fa fa-heart" data-title="Add to Favourites" data-tooltip="true"></i></a>
-	                                            <a href="#"><i class="fa fa-exchange" data-title="Compare" data-tooltip="true"></i></a>
-                                            </div>
-                                        </div>
-			    					</div>
-			    				</div>
-			    			</div>
+							<div th:each="data, row: ${list}" th:with="numList=${ {2,1,0} }" th:if="${row.count % 3 == 0 or row.last}" class="row">
+							    <div class="cell-4 fx shop-item"  data-animate="fadeInUp" th:each="num : ${numList}" th:with="dataIndex=(${row.index} - ${num})" th:if="${row.count % 3 == 0}" th:include="fragments/product-listing :: product">	
+								</div>										
+								<div class="cell-4 fx shop-item"  data-animate="fadeInUp" th:each="num : ${numList}" th:with="dataIndex=(${row.index} - ${num})" th:if="${row.last} and ${row.count % 3 != 0} and ${num &lt; row.count % 3}" th:include="fragments/product-listing :: product">
+							    </div>
+							</div>
 						</div>
 					</div>
 				</div>

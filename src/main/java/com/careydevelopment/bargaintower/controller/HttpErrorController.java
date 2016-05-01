@@ -10,8 +10,7 @@ public class HttpErrorController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(HttpErrorController.class);
 	
 	 @RequestMapping("/404")
-	 public String error(){
-		 LOGGER.info("Processing error");
+	 public String error404(){
 		 return "404";
 	 }
 }

@@ -1,5 +1,7 @@
 package com.careydevelopment.bargaintower.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,22 +22,18 @@ import com.careydevelopment.bargaintower.util.TitleHelper;
 public class ProductController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
-
 	@Autowired
 	ProductRepository productRepository;
 	
 	@RequestMapping("/{productId}")
     public String shop(@PathVariable("productId") String productId, Model model) throws ProductNotFoundException {    	    
-    	
-    	//model.addAttribute("shopActive", "active");
-    	
+
 		Product product = fetchProduct(productId); 
 		
 		LOGGER.info("Product is " + product.getName());
 		
-		/*for (String s : product.getSizes()) {
-			LOGGER.info("Size is " + s);
-		}*/
+		List<Product> relatedProducts = productRepository.findTop3ByAdvertiserCategory(product.getAdvertiserCategory());
+		model.addAttribute("list", relatedProducts);
 		
     	model.addAttribute("product",product);
     	model.addAttribute("title", TitleHelper.getTitle(product));
