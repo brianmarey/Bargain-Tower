@@ -1,11 +1,11 @@
 package com.careydevelopment.bargaintower.jpa.entity;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.careydevelopment.bargaintower.util.SiteConstants;
+import com.careydevelopment.bargaintower.util.SlugMaker;
 
 @Entity
 @Table(name = "product")
@@ -72,22 +73,22 @@ public class Product extends AbstractEntity{
 	private String imageUrl = "";
 	
 
-	 @OneToMany
-	 @JoinTable(
-	   name = "product_attribute", 
-	   joinColumns = @JoinColumn(name = "product_id"), 
-	   inverseJoinColumns = @JoinColumn(name = "attribute_value_id")
-	 )
-	 private List<AttributeValue> attributes = new ArrayList<AttributeValue>();
+	@OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "product_attribute",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "attribute_value_id")
+    )
+	private List<AttributeValue> attributes = new ArrayList<AttributeValue>();
 	
 	@Transient
 	private boolean moreColors = false;
 	 
 	@Transient
-	private String sizes = "";
+	private List<String> sizes = new ArrayList<String>();
 	
 	@Transient
-	private String colors = "";
+	private List<String> colors = new ArrayList<String>();
 	
 	@Transient
 	private String artist = "";
@@ -126,18 +127,30 @@ public class Product extends AbstractEntity{
 	private boolean onSale = false;
 	
 	
-	public String getSizes() {
+	public List<String> getSizes() {
+		if (sizes.size() == 0) {
+			for (AttributeValue val : attributes) {
+				if (val.getAttribute().getName().equalsIgnoreCase("Size")) {
+					sizes.add(val.getName());
+				}
+			}
+		}
+		
 		return sizes;
 	}
-	public void setSizes(String sizes) {
-		this.sizes = sizes;
-	}
-	public String getColors() {
+
+	public List<String> getColors() {
+		if (colors.size() == 0) {
+			for (AttributeValue val : attributes) {
+				if (val.getAttribute().getName().equalsIgnoreCase("Color")) {
+					colors.add(val.getName());
+				}
+			}
+		}
+		
 		return colors;
 	}
-	public void setColors(String colors) {
-		this.colors = colors;
-	}
+
 	public String getImageUrl() {
 		return imageUrl;
 	}
@@ -353,5 +366,18 @@ public class Product extends AbstractEntity{
 		return (numColors > 1);
 	}
 	
+	
+	public String getProductUrl() {
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("/product/");
+		builder.append(id);
+		builder.append("-");
+
+		String slug = SlugMaker.makeSlug(name);
+		builder.append(slug);
+		
+		return builder.toString();
+	}
 	
 }

@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>Page Not Found</title>
+		<meta name="description" content="Page Not Found"/>
+		<meta name="author" content="Carey Development, LLC"/>
+		
+		<!-- Mobile Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+		
+		<!-- Put favicon.ico and apple-touch-icon(s).png in the images folder -->
+	    <link rel="shortcut icon" href="@{/images/favicon.ico}"></link>
+		    	
+		<!-- CSS StyleSheets -->
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800&amp;amp;subset=latin,latin-ext"></link>
+		<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"></link>
+		<link rel="stylesheet" th:href="@{/css/animate.css}"></link>
+		<link rel="stylesheet" th:href="@{/css/prettyPhoto.css}"></link>
+		<link rel="stylesheet" th:href="@{/css/slick.css}"></link>
+		<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+		<link rel="stylesheet" th:href="@{/css/responsive.css}"></link>
+		
+		<!-- Skin style (** you can change the link below with the one you need from skins folder in the css folder **) -->
+		<link rel="stylesheet" th:href="@{/css/skins/skin2.css}"></link>
+	
+	</head>
+	<body class="bg1">
+	    
+	    <!-- site preloader start -->
+	    <div class="page-loader">
+	    	<div class="loader-in"></div>
+	    </div>
+	    <!-- site preloader end -->
+	    
+	    <div class="pageWrapper fixedPage">
+		    
+			<!-- Header Start -->
+			<div id="headWrapper" class="clearfix">
+		    	<div th:include="fragments/header :: header"></div>			    
+			</div>
+			<!-- Header End -->
+			
+			<!-- Content Start -->
+			<div id="contentWrapper">
+				<div class="page-title title-1">
+					<div class="container">
+						<div class="row">
+							<div class="cell-12">
+								<h1 class="fx" data-animate="fadeInLeft">Page <span style="color:#F2F2F2">Not Found</span></h1>
+								<div class="breadcrumbs main-bg fx" data-animate="fadeInUp">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="sectionWrapper">
+					<div class="container">
+		    			<div class="not-found">
+		    				<p class="hint extraLarge">The Page You Are Looking For Can’t Be Found</p>
+		    				<hr class="hr-style3"></hr>
+		    				<div class="err-404">
+			    				Not<span class="main-color">Found</span>		
+			    			</div>
+			    			<hr class="hr-style3"></hr>
+			    			<p>We're sorry. The page you're looking for can't be found.</p>
+			    			<a class="btn btn-medium" th:href="@{/}">Back To Home Page</a>		
+			    		</div>
+					</div>
+				</div>
+				
+			</div>
+			<!-- Content End -->
+			
+			<div th:include="fragments/footer :: footer"></div>
+		    
+		    <!-- Back to top Link -->
+	    	<div id="to-top" class="main-bg"><span class="fa fa-chevron-up"></span></div>
+	    </div>
+
+		<div th:include="fragments/footer :: scriptarea"></div>
+	</body>
+</html>
