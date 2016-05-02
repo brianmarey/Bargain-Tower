@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Formula;
+
 import com.careydevelopment.bargaintower.util.SiteConstants;
 import com.careydevelopment.bargaintower.util.SlugMaker;
 
@@ -80,6 +82,9 @@ public class Product extends AbstractEntity{
             inverseJoinColumns = @JoinColumn(name = "attribute_value_id")
     )
 	private List<AttributeValue> attributes = new ArrayList<AttributeValue>();
+	
+	@Formula("cast(price as decimal(6,2))")
+	private Float decimalPrice = 0.0f;
 	
 	@Transient
 	private boolean moreColors = false;
@@ -366,7 +371,6 @@ public class Product extends AbstractEntity{
 		return (numColors > 1);
 	}
 	
-	
 	public String getProductUrl() {
 		StringBuilder builder = new StringBuilder();
 		
@@ -379,5 +383,14 @@ public class Product extends AbstractEntity{
 		
 		return builder.toString();
 	}
+
+	public Float getDecimalPrice() {
+		return decimalPrice;
+	}
+
+	public void setDecimalPrice(Float decimalPrice) {
+		this.decimalPrice = decimalPrice;
+	}
+	
 	
 }

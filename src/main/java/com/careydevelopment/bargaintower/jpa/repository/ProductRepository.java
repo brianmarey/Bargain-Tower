@@ -15,7 +15,7 @@ public interface ProductRepository extends BaseRepository<Product,Long>{
 	@Query("SELECT p FROM Product p")
     Page<Product> findProducts(Pageable page);
 	
-	@Query("SELECT p FROM Product p where p.advertiserCategory = :category or p.advertiserCategory.parent = :category or p.advertiserCategory.parent.parent = :category")
+	@Query("SELECT p FROM Product p where p.advertiserCategory = :category or p.advertiserCategory.parent = :category or p.advertiserCategory.parent.parent = :category order by decimalPrice asc")
     Page<Product> findProductsByCategory(Pageable page, @Param("category") Category category);
 	
 	List<Product> findTop3ByAdvertiserCategory(Category advertiserCategory);
