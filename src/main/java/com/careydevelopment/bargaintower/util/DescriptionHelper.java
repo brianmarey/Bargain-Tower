@@ -1,5 +1,6 @@
 package com.careydevelopment.bargaintower.util;
 
+import com.careydevelopment.bargaintower.jpa.entity.Category;
 import com.careydevelopment.bargaintower.jpa.entity.Product;
 
 public class DescriptionHelper {
@@ -13,14 +14,12 @@ public class DescriptionHelper {
 	}
 	
 	
-	public static final String getDescription(String category, String subcategory) {
+	public static final String getDescription(Category category) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(SiteConstants.DEFAULT_SHOP_PREFIX);
 		
-		if (subcategory != null && subcategory.length() > 2) {
-			builder.append(subcategory);
-		} else if (category != null && subcategory.length() > 2) {
-			builder.append(category);
+		if (category.hasGrandparent() || category.hasParent()) {
+			builder.append(category.getName());
 		} else {
 			builder.append(SiteConstants.DEFAULT_SHOP_SUFFIX);
 		}

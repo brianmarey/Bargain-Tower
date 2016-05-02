@@ -5,13 +5,11 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "category")
@@ -19,6 +17,9 @@ public class Category extends AbstractEntity{
 	
 	@Column(name="name")
 	private String name;
+	
+	@Column(name="slug")
+	private String slug;
 	
 	@OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
 	private List<Category> children;
@@ -57,5 +58,41 @@ public class Category extends AbstractEntity{
 	}
 	public void setParent(Category parent) {
 		this.parent = parent;
+	}
+
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+	
+	public boolean hasParent() {
+		return (parent != null);
+	}
+	
+	public boolean hasGrandparent() {
+		boolean hasGrandparent = false;
+		
+		if (hasParent()) {
+			if (parent.getParent() != null) hasGrandparent = true;
+		}
+		
+		return hasGrandparent;
+	}
+	
+	public Category getGrandparent() {
+		Category grandparent = null;
+		
+		if (hasParent()) {
+			grandparent = parent.getParent();
+		}
+		
+		return grandparent;
+	}
+	
+	public String toString() {
+		return name;
 	}
 }

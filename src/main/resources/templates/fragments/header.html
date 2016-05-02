@@ -22,30 +22,21 @@
 				    <div class="container">
 					    <div class="row">
 					    	<div class="logo cell-3">
-						    	<a href="home.html"></a>
+						    	<a th:href="@{/}"></a>
 						    </div>
 						    <div class="cell-9 top-menu">
 							    <!-- top navigation menu start -->
 							    <nav class="top-nav mega-menu">
 								    <ul>
-								      <li><a href="#"><i class="fa fa-home"></i><span>Home</span></a>
-									      <ul>
-										      <li><a href="home.html">Home Version 1</a></li>
-										      <li><a href="home2.html">Home Version 2</a></li>
-										      <li><a href="home3.html">Home Version 3</a></li>
-										      <li><a href="home4.html">Home Version 4</a></li>
-										      <li><a href="home5.html">Home Version 5</a></li>
-										      <li><a href="homenews.html">Home News Magazine</a></li>
-									      </ul>
-								      </li>
+								      <li><a th:href="@{/}"><i class="fa fa-home"></i><span>Home</span></a></li>
 								      <li><a th:href="@{/shop/men}"><i class="fa fa-male"></i><span>Men</span></a>
 								      	<ul>
 										      <li><a th:href="@{/shop/men/mens-shirts}">Men's Shirts</a>
 										      		<ul>
-										      			<li><a th:href="@{/shop/men/mens-shirts/mens-polo-shirts}">Men's Polo Shirts</a></li>
-										      			<li><a href="header3.html">Header Top Center Logo</a></li>
-										      			<li><a href="header-left-side.html">Left Side Header</a></li>
-										      			<li><a href="header-right-side.html">Right Side Header</a></li>
+										      			<li><a th:href="@{/shop/men/mens-shirts/mens-polo-shirts}">Polos</a></li>
+										      			<li><a th:href="@{/shop/men/mens-shirts/mens-casual-shirts}">Casual</a></li>
+										      			<li><a th:href="@{/shop/men/mens-shirts/mens-dress-shirts}">Dress</a></li>
+										      			<li><a th:href="@{/shop/men/mens-shirts/mens-henley-shirts}">Henleys</a></li>
 										      		</ul>
 										      </li>
 										      <li><a href="#"><i class="fa fa-bars"></i>Menu Styles</a>
